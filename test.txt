@@ -1,0 +1,237 @@
+// 'use client';
+
+// import React, { useState, useEffect } from 'react';
+// import { motion, AnimatePresence } from 'framer-motion';
+
+// const Home: React.FC = () => {
+//   const [phase, setPhase] = useState(0);
+//   const phases = [
+//     '...',
+//     'hello,',
+//     "i'm",
+//     'Julia de Blaauw'
+//   ];
+  
+//   useEffect(() => {
+//     const phaseTimeouts = [
+//       setTimeout(() => setPhase(1), 1200),
+//       setTimeout(() => setPhase(2), 2400),
+//       setTimeout(() => setPhase(3), 3600),
+//     ];
+    
+//     return () => phaseTimeouts.forEach(clearTimeout);
+//   }, []);
+  
+//   const textVariants = {
+//     initial: { 
+//       opacity: 0, 
+//       y: 20,
+//       scale: 0.9,
+//       filter: 'blur(4px)'
+//     },
+//     animate: { 
+//       opacity: 1, 
+//       y: 0,
+//       scale: 1,
+//       filter: 'blur(0px)'
+//     },
+//     exit: { 
+//       opacity: 0, 
+//       y: -20,
+//       scale: 1.1,
+//       filter: 'blur(4px)'
+//     }
+//   };
+  
+//   const containerVariants = {
+//     initial: { scale: 1 },
+//     animate: { 
+//       scale: phase >= 3 ? 1.02 : 1,
+//       transition: { 
+//         duration: 0.8,
+//         ease: [0.25, 0.1, 0.25, 1]
+//       }
+//     }
+//   };
+  
+//   const parenthesesVariants = {
+//     initial: { scale: 1, opacity: 0.8 },
+//     animate: { 
+//       scale: phase >= 2 ? [1, 1.05, 1] : 1,
+//       opacity: phase >= 2 ? [0.8, 1, 0.9] : 0.8,
+//       transition: { 
+//         duration: 0.6,
+//         times: [0, 0.5, 1],
+//         ease: "easeInOut"
+//       }
+//     }
+//   };
+
+//   return (
+//     <main className='w-full h-screen bg-slate-900 relative overflow-hidden'>
+//       {/* Animated background particles */}
+//       <motion.div 
+//         className="absolute inset-0 opacity-30"
+//         animate={{
+//           background: [
+//             'radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.1) 0%, transparent 50%)',
+//             'radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.1) 0%, transparent 50%)',
+//             'radial-gradient(circle at 40% 40%, rgba(120, 200, 255, 0.1) 0%, transparent 50%)'
+//           ]
+//         }}
+//         transition={{ duration: 8, repeat: Infinity, repeatType: 'reverse' }}
+//       />
+      
+//       {/* Header text with micro-animation */}
+//       <motion.p 
+//         className='absolute top-8 left-1/2 leading-tight text-white -translate-x-1/2 text-sm font-light'
+//         initial={{ opacity: 0, y: -20 }}
+//         animate={{ opacity: 1, y: 0 }}
+//         transition={{ delay: 0.5, duration: 0.8 }}
+//       >
+//         <motion.span 
+//           animate={{ opacity: [0.7, 1, 0.7] }}
+//           transition={{ duration: 3, repeat: Infinity }}
+//         >
+//           design
+//         </motion.span> <br />
+//         &nbsp;&nbsp;&nbsp;&nbsp; 
+//         <motion.span
+//           animate={{ opacity: [1, 0.7, 1] }}
+//           transition={{ duration: 3, repeat: Infinity, delay: 1.5 }}
+//         >
+//           art direction
+//         </motion.span>
+//       </motion.p>
+      
+//       {/* Footer text */}
+//       <motion.p 
+//         className='absolute text-right bottom-8 left-1/2 leading-tight text-white -translate-x-1/2 text-sm font-light'
+//         initial={{ opacity: 0, y: 20 }}
+//         animate={{ opacity: 1, y: 0 }}
+//         transition={{ delay: 0.7, duration: 0.8 }}
+//       >
+//         Julia <br />
+//         de Blaauw&nbsp;&nbsp;&nbsp;&nbsp;
+//       </motion.p>
+      
+//       {/* Corner dots with pulse animation */}
+//       <motion.div 
+//         className='w-3 aspect-square rounded-full bg-white bottom-8 left-8 absolute'
+//         animate={{ 
+//           scale: [1, 1.2, 1],
+//           opacity: [0.8, 1, 0.8]
+//         }}
+//         transition={{ 
+//           duration: 2, 
+//           repeat: Infinity,
+//           ease: "easeInOut"
+//         }}
+//       />
+//       <motion.div 
+//         className='w-3 aspect-square rounded-full bg-white bottom-8 right-8 absolute'
+//         animate={{ 
+//           scale: [1, 1.2, 1],
+//           opacity: [0.8, 1, 0.8]
+//         }}
+//         transition={{ 
+//           duration: 2, 
+//           repeat: Infinity,
+//           ease: "easeInOut",
+//           delay: 1
+//         }}
+//       />
+
+//       {/* Main content container */}
+//       <motion.div 
+//         className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'
+//         variants={containerVariants}
+//         initial="initial"
+//         animate="animate"
+//       >
+//         <motion.p 
+//           className='text-[60px] md:text-[80px] lg:text-[100px] text-white font-light tracking-wide'
+//           style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
+//         >
+//           <motion.span
+//             variants={parenthesesVariants}
+//             initial="initial"
+//             animate="animate"
+//           >
+//             (
+//           </motion.span>
+//           &nbsp;&nbsp;
+          
+//           <AnimatePresence mode="wait">
+//             {phase < 5 ? (
+//               <motion.span
+//                 key={phase}
+//                 variants={textVariants}
+//                 initial="initial"
+//                 animate="animate"
+//                 exit="exit"
+//                 transition={{ 
+//                   duration: 0.6,
+//                   ease: [0.25, 0.1, 0.25, 1]
+//                 }}
+//                 className="inline-block"
+//               >
+//                 {phases[phase]}
+//               </motion.span>
+//             ) : (
+//               <motion.span
+//                 key="typewriter"
+//                 initial={{ opacity: 0 }}
+//                 animate={{ opacity: 1 }}
+//                 transition={{ duration: 0.3 }}
+//                 className="inline-block relative"
+//               >
+//                 {typewriterText}
+//                 <motion.span
+//                   className="inline-block w-0.5 h-16 bg-white ml-1 -mb-2"
+//                   animate={{ opacity: [0, 1, 0] }}
+//                   transition={{ 
+//                     duration: 0.8, 
+//                     repeat: typewriterText.length < finalText.length ? Infinity : 3,
+//                     ease: "easeInOut"
+//                   }}
+//                 />
+//               </motion.span>
+//             )}
+//           </AnimatePresence>
+          
+//           &nbsp;&nbsp;
+//           <motion.span
+//             variants={parenthesesVariants}
+//             initial="initial"
+//             animate="animate"
+//           >
+//             )
+//           </motion.span>
+//         </motion.p>
+//       </motion.div>
+//     </main>
+//   );
+// };
+
+// export default Home;
+
+{/* <motion.div
+          initial={{ width: 80 }}
+          animate={{ width: 600 }}
+          transition={{
+            duration: 0.6,
+            delay: 1.5,
+            ease: cubicBezier(0.71, 0.68, 0.13, 0.99),
+          }}
+          // className='flex justify-center h-[80px] border border-white/60 relative border-dashed leading-none items-center'
+          className='flex justify-center  items-center'
+        >
+          {/* <div className='w-3 aspect-square bg-white absolute -top-1.5 -left-1.5' />
+          <div className='w-3 aspect-square bg-white absolute -top-1.5 -right-1.5' />
+          <div className='w-3 aspect-square bg-white absolute -bottom-1.5 -left-1.5' />
+          <div className='w-3 aspect-square bg-white absolute -bottom-1.5 -right-1.5' /> */}
+          <div className='w-fit text-white text-[40px] h-[80px] overflow-hidden flex items-center'>
+            <p>hi</p>
+          </div>
+        </motion.div> */}
