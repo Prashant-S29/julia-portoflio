@@ -126,6 +126,7 @@ const Intro: React.FC<IntroProps> = ({ onComplete }) => {
           variants={photoVariants}
           transition={{
             duration: 0.3,
+            // delay: 1,
             ease: cubicBezier(0.71, 0.68, 0.13, 0.99),
           }}
           className='bg-white mx-5 relative overflow-hidden'
@@ -179,50 +180,56 @@ const Intro: React.FC<IntroProps> = ({ onComplete }) => {
           <div className='flex items-center'>
             <div className='flex items-center'>
               J
-              {!hideFullName && (
-                <motion.span
-                  variants={nameVariants}
-                  initial='initial'
-                  animate={hideFullName ? 'exit' : 'animate'}
-                  exit='exit'
-                  transition={{ duration: 0.3, delay: 1 }}
-                  className='overflow-hidden inline-block'
-                >
-                  ulia
-                </motion.span>
-              )}
-              &nbsp;
+              <AnimatePresence mode='wait'>
+                {!hideFullName && (
+                  <motion.span
+                    variants={nameVariants}
+                    initial='initial'
+                    animate={hideFullName ? 'exit' : 'animate'}
+                    exit='exit'
+                    transition={{ duration: 0.3, delay: 1 }}
+                    className='overflow-hidden inline-block'
+                  >
+                    ulia
+                  </motion.span>
+                )}
+                &nbsp;
+              </AnimatePresence>
             </div>
 
             {photoComponent}
 
             <span>d</span>
           </div>
-          {!hideFullName && (
-            <motion.span
-              variants={nameVariants}
-              initial='initial'
-              animate={hideFullName ? 'exit' : 'animate'}
-              exit='exit'
-              transition={{ duration: 0.3, delay: 1 }}
-              className='overflow-hidden inline-block'
-            >
-              e&nbsp;
-            </motion.span>
-          )}
+          <AnimatePresence mode='wait'>
+            {!hideFullName && (
+              <motion.span
+                variants={nameVariants}
+                initial='initial'
+                animate={hideFullName ? 'exit' : 'animate'}
+                exit='exit'
+                transition={{ duration: 0.3, delay: 1 }}
+                className='overflow-hidden inline-block'
+              >
+                e&nbsp;
+              </motion.span>
+            )}
+          </AnimatePresence>
           B
-          {!hideFullName && (
-            <motion.span
-              variants={nameVariants}
-              initial='initial'
-              animate={hideFullName ? 'exit' : 'animate'}
-              exit='exit'
-              transition={{ duration: 0.3, delay: 1 }}
-              className='overflow-hidden inline-block'
-            >
-              laauw
-            </motion.span>
-          )}
+          <AnimatePresence mode='wait'>
+            {!hideFullName && (
+              <motion.span
+                variants={nameVariants}
+                initial='initial'
+                animate={hideFullName ? 'exit' : 'animate'}
+                exit='exit'
+                transition={{ duration: 0.3, delay: 1 }}
+                className='overflow-hidden inline-block'
+              >
+                laauw
+              </motion.span>
+            )}
+          </AnimatePresence>
         </motion.div>
       ),
     };
