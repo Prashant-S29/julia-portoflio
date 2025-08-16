@@ -1,38 +1,12 @@
 'use client';
 
-import React, {
-  useEffect,
-  useState,
-  useCallback,
-  useMemo,
-  useRef,
-} from 'react';
-import Intro from './Intro';
-import { AnimatePresence, motion } from 'framer-motion';
+import React, { useMemo, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
-const INTRO_DURATION = 18000; // 16 seconds
+type ActiveRole = 'designer' | 'art-director';
 
 export const Hero: React.FC = () => {
-  const [showIntro, setShowIntro] = useState(true);
-  const [isIntroComplete, setIsIntroComplete] = useState(false);
-  const timerRef = useRef<NodeJS.Timeout>(null);
-
-  // Handle intro completion
-  const handleIntroComplete = useCallback(() => {
-    setIsIntroComplete(true);
-    setTimeout(() => {
-      setShowIntro(false);
-    }, 500);
-  }, []);
-
-  const fadeVariants = useMemo(
-    () => ({
-      initial: { opacity: 0 },
-      animate: { opacity: 1 },
-      exit: { opacity: 0 },
-    }),
-    [],
-  );
+  const [activeRole, setActiveRole] = useState<ActiveRole>('art-director');
 
   const contentVariants = useMemo(
     () => ({
@@ -43,63 +17,206 @@ export const Hero: React.FC = () => {
     [],
   );
 
-  useEffect(() => {
-    timerRef.current = setTimeout(() => {
-      if (showIntro) {
-        setShowIntro(false);
-      }
-    }, INTRO_DURATION);
+  // Animation variants for the description texts
+  const textItemVariants = useMemo(
+    () => ({
+      initial: { opacity: 0, y: 10 },
+      animate: { opacity: 1, y: 0 },
+      exit: { opacity: 0, y: -10 },
+    }),
+    [],
+  );
 
-    return () => {
-      if (timerRef.current) {
-        clearTimeout(timerRef.current);
+  // Designer descriptions - above the title
+  const designerAboveTexts = [
+    'graphical',
+    'digital',
+    { type: 'flex', items: ['visual', 'strategic'] },
+  ];
+
+  // Designer descriptions - below the title
+  const designerBelowTexts = [
+    'design',
+    { text: 'direction', indent: 'ml-[100px]' },
+    'visual concept',
+    { text: 'printed matter', indent: 'ml-7' },
+    'visual identity',
+    { text: 'branding', indent: 'ml-3' },
+    'content creation',
+  ];
+
+  // Art Director descriptions
+  const artDirectorTexts = [
+    'of (moving) images • concepts',
+    'on set ideation • design direction',
+    'programming • visual space',
+    'brand development',
+    { text: '• strategic visual and research', indent: 'ml-7' },
+  ];
+
+  const renderDesignerAbove = () => {
+    return designerAboveTexts.map((item, index) => {
+      if (typeof item === 'object' && item.type === 'flex') {
+        return (
+          <motion.div
+            key={`designer-above-${index}`}
+            className='flex gap-9'
+            variants={textItemVariants}
+            initial='initial'
+            animate='animate'
+            exit='exit'
+            transition={{ duration: 0.2, delay: 0.1 + index * 0.1 }}
+          >
+            <p>{item.items[0]}</p>
+            <p>{item.items[1]}</p>
+          </motion.div>
+        );
       }
-    };
-  }, [showIntro]);
+      return (
+        <motion.p
+          key={`designer-above-${index}`}
+          variants={textItemVariants}
+          initial='initial'
+          animate='animate'
+          exit='exit'
+          transition={{ duration: 0.2, delay: 0.1 + index * 0.1 }}
+        >
+          {item as string}
+        </motion.p>
+      );
+    });
+  };
+
+  const renderDesignerBelow = () => {
+    return designerBelowTexts.map((item, index) => {
+      const text = typeof item === 'object' ? item.text : item;
+      const indent = typeof item === 'object' ? item.indent : '';
+
+      return (
+        <motion.p
+          key={`designer-below-${index}`}
+          className={indent}
+          variants={textItemVariants}
+          initial='initial'
+          animate='animate'
+          exit='exit'
+          transition={{ duration: 0.2, delay: 0.1 + index * 0.1 }}
+        >
+          {text}
+        </motion.p>
+      );
+    });
+  };
+
+  const renderArtDirectorLayout = () => {
+    return artDirectorTexts.map((item, index) => {
+      const text = typeof item === 'object' ? item.text : item;
+      const indent = typeof item === 'object' ? item.indent : '';
+
+      return (
+        <motion.p
+          key={`art-director-${index}`}
+          className={indent}
+          variants={textItemVariants}
+          initial='initial'
+          animate='animate'
+          exit='exit'
+          transition={{ duration: 0.2, delay: 0.1 + index * 0.1 }}
+        >
+          {text}
+        </motion.p>
+      );
+    });
+  };
 
   return (
-    <div className='relative w-full h-screen overflow-hidden'>
-      <AnimatePresence mode='wait'>
-        {showIntro ? (
-          <motion.div
-            key='intro'
-            variants={fadeVariants}
-            initial='initial'
-            animate='animate'
-            exit='exit'
-            transition={{
-              duration: isIntroComplete ? 0.8 : 0.3,
-              ease: 'easeInOut',
-            }}
-            className='absolute inset-0'
-          >
-            <Intro onComplete={handleIntroComplete} />
-          </motion.div>
-        ) : (
-          <motion.div
-            key='main-content'
-            variants={contentVariants}
-            initial='initial'
-            animate='animate'
-            exit='exit'
-            transition={{
-              duration: 0.6,
-              delay: 0.2,
-              ease: 'easeOut',
-            }}
-            className='absolute inset-0 flex flex-col items-center justify-center bg-white'
-          >
-            <div className='text-center'>
-              <h1 className='text-4xl font-light text-gray-800 mb-4'>
-                Welcome
-              </h1>
-              <p className='text-lg text-gray-600'>
-                Julia de Blaauw - Design & Art Direction
-              </p>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
+    <motion.div
+      key='main-content'
+      variants={contentVariants}
+      initial='initial'
+      animate='animate'
+      exit='exit'
+      transition={{
+        duration: 0.6,
+        delay: 0.2,
+        ease: 'easeOut',
+      }}
+      className='flex flex-col w-full min-h-screen items-center justify-center'
+    >
+      <div className='relative flex items-center gap-[50px] leading-none'>
+        <p className='text-[80px] font-dante text-brand-primary'>{'('}</p>
+        <div className='min-w-[900px] flex flex-col gap-5 text-[80px] font-dante text-brand-primary'>
+          <p className='ml-[100px]'>I&apos;m a</p>
+          <div className='ml-[400px] relative'>
+            {/* Designer - Above text */}
+            {activeRole === 'designer' && (
+              <AnimatePresence mode='wait'>
+                <motion.div
+                  key='designer-above'
+                  className='absolute -top-[130px] flex flex-col gap-2 text-[32px] left-[100px] font-dante'
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  {renderDesignerAbove()}
+                </motion.div>
+              </AnimatePresence>
+            )}
+            {/* Designer - Below text */}
+            {activeRole === 'designer' && (
+              <AnimatePresence mode='wait'>
+                <motion.div
+                  key='designer-below'
+                  className='absolute top-[100%] mt-5 flex flex-col gap-2 text-[32px] left-[200px] font-dante'
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  {renderDesignerBelow()}
+                </motion.div>
+              </AnimatePresence>
+            )}
+            {/* Art Director - Below text */}
+            {activeRole === 'art-director' && (
+              <AnimatePresence mode='wait'>
+                <motion.div
+                  key='art-director'
+                  className='absolute top-[100%] mt-8 w-full flex flex-col gap-2 text-[32px] left-[100px] font-dante'
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  {renderArtDirectorLayout()}
+                </motion.div>
+              </AnimatePresence>
+            )}
+            i.{' '}
+            <span
+              className={`font-chong ml-8 px-4 py-3 ${
+                activeRole === 'designer' && 'bg-brand-primary text-white'
+              } text-brand-primary duration-150 cursor-pointer`}
+              onMouseEnter={() => setActiveRole('designer')}
+            >
+              designer
+            </span>
+          </div>
+          <div>
+            ii.{' '}
+            <span
+              className={`font-chong px-4 py-3 ${
+                activeRole === 'art-director' && 'bg-brand-primary text-white'
+              }  text-brand-primary duration-150 cursor-pointer`}
+              onMouseEnter={() => setActiveRole('art-director')}
+            >
+              art director
+            </span>
+          </div>
+        </div>
+        <p className='text-[80px] font-dante text-brand-primary'>{')'}</p>
+      </div>
+    </motion.div>
   );
 };

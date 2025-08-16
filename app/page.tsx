@@ -1,8 +1,8 @@
-import { Hero } from '@/components/Hero';
 import React from 'react';
+import { HeroContainer } from '@/components/HeroContainer';
 
 const Page: React.FC = () => {
-  return <Hero />;
+  return <HeroContainer />;
 };
 
 export default Page;

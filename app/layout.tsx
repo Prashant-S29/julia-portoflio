@@ -2,7 +2,8 @@ import '@/styles/globals.css';
 import type { Metadata } from 'next';
 
 // fonts
-import { dante, satoshi } from '@/public/fonts';
+import { chong, dante, satoshi } from '@/public/fonts';
+import { Overlay } from '@/components/Overlay';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -16,7 +17,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className={`${dante.variable} ${satoshi.variable} font-satoshi antialiased`}>
+      <body
+        className={`${dante.variable} ${satoshi.variable} ${chong.variable} font-satoshi relative antialiased`}
+      >
+        <Overlay />
         {children}
       </body>
     </html>

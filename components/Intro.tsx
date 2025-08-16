@@ -8,7 +8,6 @@ import React, {
   useRef,
 } from 'react';
 import { motion, AnimatePresence, cubicBezier } from 'framer-motion';
-import { fadeIn } from '@/utils/variants';
 import SquareCover from '@/components/SquareCover';
 
 const ANIMATION_TIMINGS = {
@@ -186,7 +185,7 @@ const Intro: React.FC<IntroProps> = ({ onComplete }) => {
                     initial='initial'
                     animate={hideFullName ? 'exit' : 'animate'}
                     exit='exit'
-                    transition={{ duration: 0.3, }}
+                    transition={{ duration: 0.3 }}
                     className='overflow-hidden inline-block'
                   >
                     ulia
@@ -207,7 +206,7 @@ const Intro: React.FC<IntroProps> = ({ onComplete }) => {
                 initial='initial'
                 animate={hideFullName ? 'exit' : 'animate'}
                 exit='exit'
-                transition={{ duration: 0.3, }}
+                transition={{ duration: 0.3 }}
                 className='overflow-hidden inline-block'
               >
                 e&nbsp;
@@ -222,7 +221,7 @@ const Intro: React.FC<IntroProps> = ({ onComplete }) => {
                 initial='initial'
                 animate={hideFullName ? 'exit' : 'animate'}
                 exit='exit'
-                transition={{ duration: 0.3, }}
+                transition={{ duration: 0.3 }}
                 className='overflow-hidden inline-block'
               >
                 laauw
@@ -237,49 +236,8 @@ const Intro: React.FC<IntroProps> = ({ onComplete }) => {
   }, [line, hideFullName, photoComponent, textVariants, nameVariants]);
 
   return (
-    <main className='w-full h-screen fixed top-0 z-50 bg-brand-primary overflow-hidden'>
+    <main className='w-full h-screen fixed top-0 z-40 bg-brand-primary overflow-hidden'>
       {showSquareCover && <SquareCover />}
-
-      {/* Header text */}
-      <motion.p
-        className='absolute top-8 left-1/2 leading-tight text-white -translate-x-1/2 text-sm pointer-events-none select-none'
-        variants={fadeIn('down')}
-        initial='initial'
-        animate='animate'
-        transition={{ delay: 0.5, duration: 0.1 }}
-      >
-        <span>design</span> <br />
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        <span>art direction</span>
-      </motion.p>
-
-      {/* Footer text */}
-      <motion.p
-        className='absolute text-right bottom-8 left-1/2 leading-tight text-white -translate-x-1/2 text-sm pointer-events-none select-none'
-        variants={fadeIn('up')}
-        initial='initial'
-        animate='animate'
-        transition={{ delay: 0.5, duration: 0.1 }}
-      >
-        Julia <br />
-        de Blaauw&nbsp;&nbsp;&nbsp;&nbsp;
-      </motion.p>
-
-      {/* Corner dots */}
-      <motion.div
-        variants={fadeIn('up')}
-        initial='initial'
-        animate='animate'
-        transition={{ delay: 0.5, duration: 0.1 }}
-        className='w-3 aspect-square rounded-full bg-white bottom-8 left-8 absolute'
-      />
-      <motion.div
-        variants={fadeIn('up')}
-        initial='initial'
-        animate='animate'
-        transition={{ delay: 0.5, duration: 0.1 }}
-        className='w-3 aspect-square rounded-full bg-white bottom-8 right-8 absolute'
-      />
 
       {/* Main content */}
       <motion.div

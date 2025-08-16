@@ -20,3 +20,13 @@ export const dante = localFont({
   ],
   variable: '--font-dante',
 });
+
+export const chong = localFont({
+  src: [
+    {
+      path: './chong/ChongModernPro-Italic.woff',
+      weight: '400',
+    },
+  ],
+  variable: '--font-chong',
+});

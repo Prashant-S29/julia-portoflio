@@ -45,6 +45,7 @@
   --color-brand-primary: var(--color-brand-primary);
   --font-satoshi: var(--font-satoshi);
   --font-dante: var(--font-dante);
+  --font-chong: var(--font-chong);
 }
 
 :root {
@@ -84,6 +85,7 @@
   --color-brand-primary: oklch(0.628 0.2576 29.12);
   --font-satoshi: var(--font-satoshi);
   --font-dante: var(--font-dante);
+  --font-chong: var(--font-chong);
 }
 
 .dark {
