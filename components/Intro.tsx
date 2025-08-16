@@ -15,8 +15,8 @@ const ANIMATION_TIMINGS = {
   LINE_0: 1200,
   LINE_1: 2700,
   LINE_2: 3900,
-  HIDE_FULL_NAME: 5400,
-  SHOW_PHOTO: 6200,
+  HIDE_FULL_NAME: 6000,
+  SHOW_PHOTO: 7000,
   PHOTO_TRANSITIONS: [
     7500, 8000, 8400, 8700, 8900, 9100, 9300, 9500, 9700, 9900,
   ],
@@ -126,7 +126,6 @@ const Intro: React.FC<IntroProps> = ({ onComplete }) => {
           variants={photoVariants}
           transition={{
             duration: 0.3,
-            // delay: 1,
             ease: cubicBezier(0.71, 0.68, 0.13, 0.99),
           }}
           className='bg-white mx-5 relative overflow-hidden'
@@ -187,14 +186,14 @@ const Intro: React.FC<IntroProps> = ({ onComplete }) => {
                     initial='initial'
                     animate={hideFullName ? 'exit' : 'animate'}
                     exit='exit'
-                    transition={{ duration: 0.3, delay: 1 }}
+                    transition={{ duration: 0.3, }}
                     className='overflow-hidden inline-block'
                   >
                     ulia
                   </motion.span>
                 )}
-                &nbsp;
               </AnimatePresence>
+              &nbsp;
             </div>
 
             {photoComponent}
@@ -208,7 +207,7 @@ const Intro: React.FC<IntroProps> = ({ onComplete }) => {
                 initial='initial'
                 animate={hideFullName ? 'exit' : 'animate'}
                 exit='exit'
-                transition={{ duration: 0.3, delay: 1 }}
+                transition={{ duration: 0.3, }}
                 className='overflow-hidden inline-block'
               >
                 e&nbsp;
@@ -223,7 +222,7 @@ const Intro: React.FC<IntroProps> = ({ onComplete }) => {
                 initial='initial'
                 animate={hideFullName ? 'exit' : 'animate'}
                 exit='exit'
-                transition={{ duration: 0.3, delay: 1 }}
+                transition={{ duration: 0.3, }}
                 className='overflow-hidden inline-block'
               >
                 laauw
