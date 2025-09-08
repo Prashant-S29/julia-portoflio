@@ -17,6 +17,19 @@ export const Overlay: React.FC = () => {
 
   return (
     <>
+      {/* <div className='w-full h-screen fixed  top-0 z-[60] grid grid-cols-[repeat(auto-fill,20px)] grid-rows-[repeat(auto-fill,20px)]'>
+        {Array.from({
+          length: Math.ceil(
+            (window.innerWidth * window.innerHeight) / (20 * 20),
+          ),
+        }).map((_, i) => (
+          <div
+            key={i}
+            className='w-[20px] h-[20px] hover:bg-brand-primary duration-100'
+          ></div>
+        ))}
+      </div> */}
+
       <motion.p
         className={`fixed z-50 top-8 left-1/2 transition-colors duration-100 leading-tight ${
           changeColorToRed ? 'text-brand-primary' : 'text-white'

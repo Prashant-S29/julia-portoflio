@@ -146,7 +146,7 @@ export const Hero: React.FC = () => {
       <div className='relative flex items-center gap-[50px] leading-none'>
         <p className='text-[80px] font-dante text-brand-primary'>{'('}</p>
         <div className='min-w-[900px] flex flex-col gap-5 text-[80px] font-dante text-brand-primary'>
-          <p className='ml-[100px]'>I&apos;m a</p>
+          <p className='ml-[100px] w-fit'>I&apos;m a</p>
           <div className='ml-[400px] relative'>
             {/* Designer - Above text */}
             {activeRole === 'designer' && (
@@ -195,7 +195,7 @@ export const Hero: React.FC = () => {
             )}
             i.{' '}
             <span
-              className={`font-chong ml-8 px-4 py-3 ${
+              className={`font-chong ml-8 px-4 py-3 hover:z-[999999]  ${
                 activeRole === 'designer' && 'bg-brand-primary text-white'
               } text-brand-primary duration-150 cursor-pointer`}
               onMouseEnter={() => setActiveRole('designer')}

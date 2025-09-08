@@ -4,6 +4,7 @@ import type { Metadata } from 'next';
 // fonts
 import { chong, dante, satoshi } from '@/public/fonts';
 import { Overlay } from '@/components/Overlay';
+import { Provider } from '@/components/Provider';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -20,8 +21,10 @@ export default function RootLayout({
       <body
         className={`${dante.variable} ${satoshi.variable} ${chong.variable} font-satoshi relative antialiased`}
       >
-        <Overlay />
-        {children}
+        <Provider>
+          <Overlay />
+          {children}
+        </Provider>
       </body>
     </html>
   );

@@ -236,7 +236,10 @@ const Intro: React.FC<IntroProps> = ({ onComplete }) => {
   }, [line, hideFullName, photoComponent, textVariants, nameVariants]);
 
   return (
-    <main className='w-full h-screen fixed top-0 z-40 bg-brand-primary overflow-hidden'>
+    <main
+      data-cursor-scale='0'
+      className='w-full h-screen fixed top-0 z-40 bg-brand-primary overflow-hidden'
+    >
       {showSquareCover && <SquareCover />}
 
       {/* Main content */}

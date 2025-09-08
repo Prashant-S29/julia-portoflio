@@ -10,6 +10,7 @@ import React, {
 import Intro from './Intro';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Hero } from './Hero';
+// import { Overlay } from './Overlay';
 
 const INTRO_DURATION = 16000; // 16 seconds
 
@@ -50,7 +51,9 @@ export const HeroContainer: React.FC = () => {
   }, [showIntro]);
 
   return (
-    <div className='relative w-full  min-h-screen overflow-hidden'>
+    <div className='relative w-full   min-h-screen overflow-hidden'>
+      {/* <Overlay /> */}
+
       <AnimatePresence mode='wait'>
         {showIntro ? (
           <motion.div
